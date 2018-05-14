@@ -1,12 +1,33 @@
 var orm = require("../config/orm.js");
 
-// Find all the burgers ordering by the burger name.
-orm.selectAll("burgers_db", "burger_name", "devored");
+var burger = {
+    // Find all the burgers ordering by a day.
+    all: (cb) => {
+        orm.selectAll('burgers', (res) => {
+            cb(res);
+        });
+    },
 
-// Insert a new burger in the petsburgers table.
-orm.insertOne("burgers_db", "burgers", "New Burger", true);
+    // Insert a new burger in the burgers table.
+    create: (cols, vals, cb) => {
+        orm.insertOne('burgers', cols, vals, (res) => {
+            cb(res);
+        });
+    },
 
-// Find a burger and then update it.
-orm.updateOne("burgers_db", "burgers", 3, "Taco", "New Taco", false);
+    // Find a burger and then update it.
+    update: (objColVals, condition, cb) => {
+        orm.updateOne('burgers', objColVals, condition, (res) => {
+            cb(res);
+        });
+    },
 
-module.exports = orm;
+    // Del a burger
+    delete: (vals, condition, cb) => {
+        orm.deleteOne('burgers', vals, condition, (res) => {
+            cb(res);
+        })
+    }
+}
+
+module.exports = burger;
