@@ -1,5 +1,7 @@
 var orm = require("../config/orm.js");
 
+// MVC models
+// represent the database true back end
 var burger = {
     // Find all the burgers ordering by a day.
     all: (cb) => {

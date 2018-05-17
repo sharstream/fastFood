@@ -3,14 +3,14 @@
 $(document).ready(function(){
 
 
-    //event handle to create a burger
+    //event handler to create a burger
 
     $(".create-form").on("submit", function(event){
         event.preventDefault();
 
         var newBurger = {
-            name: $("bu").val().trim(),
-            devored: $("[name=devored]:checked").val().trim()
+            burger_name: $("#bu").val().trim(),
+            devoured: $("[name=devoured]:checked").val()
         };
 
         // Send the POST request.
@@ -25,4 +25,6 @@ $(document).ready(function(){
             }
         );
     });
+
+    //event handler to update a burger
 });

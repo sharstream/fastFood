@@ -1,9 +1,20 @@
+// MVC models - object relational mapper
 var connection = require('./connection.js');
+
+function printQuestionMarks(num) {
+    var arr = [];
+
+    for (var i = 0; i < num; i++) {
+        arr.push("?");
+    }
+
+    return arr.toString();
+}
 
 // Object for all our SQL statement functions.
 var orm = {
     selectAll: (tableInput, cb) => {
-        var queryString = 'select * from ??;';
+        var queryString = 'select * from ??';
         console.log(queryString);
         connection.query(queryString, [tableInput], (err, rows) => {
             if(err) throw err;
@@ -15,9 +26,17 @@ var orm = {
         });
     },
     insertOne: (tableInput, colOfSearch, valOfCol, cb) => {
-        var queryString = 'insert into ?? values ??;';
+        var queryString = 'insert into ' + tableInput;
+
+        queryString += " (";
+        queryString += colOfSearch.toString();
+        queryString += ") ";
+        queryString += "VALUES (";
+        queryString += printQuestionMarks(valOfCol.length);
+        queryString += ") ";
+
         console.log(queryString);
-        connection.query(queryString, [tableInput, colOfSearch, valOfCol], (err, row) => {
+        connection.query(queryString, valOfCol, (err, row) => {
             if(err) throw err;
             console.log('Data received from Db:\n');
             console.log(row);

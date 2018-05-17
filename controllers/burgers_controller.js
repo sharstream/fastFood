@@ -1,3 +1,4 @@
+// MVC controller
 var express = require('express');
 
 var router = express.Router();
@@ -17,7 +18,11 @@ router.get('/', (req, res) => {
 
 //insert a burger route
 router.post('/api/burgers', (req, res) => {
-    burger.create(['mcDonald', true], [reg.body.burger_name, req.body.devored], (result) => {
+    burger.create([
+        'burger_name', 'devoured'
+    ], [
+        req.body.burger_name, req.body.devoured
+    ], (result) => {
         // Send back the ID of the new burger
         res.json({ id: result.id });
     });
@@ -32,7 +37,7 @@ router.put('/api/burgers:id', (req, res) => {
     burger.update(
         {
             burger_name: req.body.burger_name,
-            devored: reg.body.devored
+            devoured: reg.body.devored
         },
         condition,
         (result) => {
