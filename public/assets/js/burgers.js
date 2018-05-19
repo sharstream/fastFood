@@ -5,16 +5,17 @@ $(document).ready(function(){
 
     //event handler to create a burger
 
-    $(".create-form").on("submit", function(event){
+    $(".create-form").on("submit", function (event) {
         event.preventDefault();
-
+        console.log('burger name: ' + $("#bu").val().trim());
+        console.log('devoured: ' + $("[name=devoured]:checked").val());
         var newBurger = {
             burger_name: $("#bu").val().trim(),
             devoured: $("[name=devoured]:checked").val()
         };
 
         // Send the POST request.
-        $.ajax("/api/burgers", {
+        $.ajax("/api/burgers/", {
             type: "POST",
             data: newBurger
         }).then(
