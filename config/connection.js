@@ -1,4 +1,6 @@
-require('dotenv').config;
+require('dotenv').config({
+    silent: true
+});
 
 var mysql = require('mysql');
 
